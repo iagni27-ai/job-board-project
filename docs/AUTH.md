@@ -43,8 +43,11 @@ dan input divalidasi dengan Zod. Tidak ada library auth pihak ketiga.
 
 ```bash
 npm install jose bcryptjs zod
-cp .env.example .env.local   # isi SESSION_SECRET (openssl rand -base64 48)
+cp .env.example .env.local   # opsional di development, wajib di production
 npm run dev
 ```
+
+Di development, jika `SESSION_SECRET` kosong, dipakai kunci bawaan dan muncul peringatan di terminal.
+Di production, aplikasi menolak berjalan tanpa `SESSION_SECRET` (minimal 32 karakter acak, `openssl rand -base64 48`).
 
 Untuk mencoba role admin, isi `ADMIN_EMAIL` dan `ADMIN_PASSWORD` di `.env.local` (hanya di development).
