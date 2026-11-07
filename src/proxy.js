@@ -23,14 +23,13 @@ export async function proxy(request) {
     if (!inOwnArea) return redirectTo(ownPath);
   }
 
-  // Sudah login: tidak perlu membuka login/register lagi.
-  if ((pathname === "/login" || pathname === "/register") && session) {
-    return redirectTo(dashboardPathFor(session.role));
-  }
+  // Pengalihan "sudah login" untuk /login dan /register ada di GuestGuard
+  // (dicek ke server). Jangan dilakukan di sini: cookie yang masih valid tapi
+  // user-nya sudah tidak ada akan membuat redirect loop dengan RoleGuard.
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login", "/register"],
+  matcher: ["/dashboard/:path*"],
 };

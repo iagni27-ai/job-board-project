@@ -10,6 +10,8 @@ dan input divalidasi dengan Zod. Tidak ada library auth pihak ketiga.
    cookie `session` (`httpOnly`, `sameSite=lax`, `secure` di production, 7 hari).
 3. **Proteksi rute, dua lapis**:
    - `src/proxy.js` pengecekan cepat sebelum render: belum login ke `/login`, salah role ke dashboard sendiri.
+     Proxy hanya untuk `/dashboard/*`. Pengalihan user yang sudah login dari `/login` dan `/register`
+     dilakukan `GuestGuard` (cek ke server), supaya cookie lama tidak membuat redirect loop.
    - `src/lib/auth/dal.js` `requireRole()` pengecekan sebenarnya di server (layout tiap dashboard lewat `RoleGuard`).
      Role dibaca ulang dari database, bukan dipercaya dari cookie.
 4. **Logout**: hapus cookie lewat Server Action `logout`.

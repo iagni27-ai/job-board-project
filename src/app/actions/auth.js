@@ -14,7 +14,14 @@ const BCRYPT_ROUNDS = 12;
 // supaya penyerang tidak bisa menebak email mana yang terdaftar.
 const DUMMY_HASH = bcrypt.hashSync("password-palsu", BCRYPT_ROUNDS);
 
-// State yang dikembalikan ke form: { errors?: { field: pesan }, message?: string }
+// State yang dikembalikan ke form:
+// { errors?: { field: pesan }, message?: string, values?: { ... } }
+// "values" berisi isian sebelumnya (TANPA password) supaya form tidak kosong lagi
+// setelah gagal; React 19 mereset form setelah action selesai.
+const text = (formData, key) => {
+  const value = formData.get(key);
+  return typeof value === "string" ? value : "";
+};
 
 export async function register(_prevState, formData) {
   const parsed = registerSchema.safeParse({
@@ -25,8 +32,14 @@ export async function register(_prevState, formData) {
     role: formData.get("role"),
   });
 
+  const values = {
+    name: text(formData, "name"),
+    email: text(formData, "email"),
+    role: text(formData, "role"),
+  };
+
   if (!parsed.success) {
-    return { errors: toFieldErrors(parsed.error) };
+    return { errors: toFieldErrors(parsed.error), values };
   }
 
   const { name, email, password, role } = parsed.data;
@@ -34,7 +47,7 @@ export async function register(_prevState, formData) {
   const user = await createUser({ name, email, passwordHash, role });
 
   if (!user) {
-    return { errors: { email: "Email sudah terdaftar" } };
+    return { errors: { email: "Email sudah terdaftar" }, values };
   }
 
   await createSession(user);
@@ -47,8 +60,10 @@ export async function login(_prevState, formData) {
     password: formData.get("password"),
   });
 
+  const values = { email: text(formData, "email") };
+
   if (!parsed.success) {
-    return { errors: toFieldErrors(parsed.error) };
+    return { errors: toFieldErrors(parsed.error), values };
   }
 
   const { email, password } = parsed.data;
@@ -57,6 +72,7 @@ export async function login(_prevState, formData) {
   if (!limit.allowed) {
     return {
       message: `Terlalu banyak percobaan. Coba lagi dalam ${limit.retryAfterMinutes} menit.`,
+      values,
     };
   }
 
@@ -65,7 +81,7 @@ export async function login(_prevState, formData) {
 
   // Pesan sengaja sama untuk "email salah" dan "password salah".
   if (!user || !user.isActive || !passwordOk) {
-    return { message: "Email atau password salah" };
+    return { message: "Email atau password salah", values };
   }
 
   resetRateLimit(`login:${email}`);
