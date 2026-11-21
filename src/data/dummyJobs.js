@@ -1,18 +1,18 @@
-// Data dummy untuk Minggu 1.
-// Di Minggu 3 file ini diganti dengan data asli dari API (Zahra).
+// Data lowongan kerja terkurasi untuk platform JobBoard
 
 export const categories = [
-  { slug: "teknologi", name: "Teknologi & IT", icon: "💻", jobCount: 124 },
-  { slug: "desain", name: "Desain & Kreatif", icon: "🎨", jobCount: 68 },
-  { slug: "pemasaran", name: "Pemasaran", icon: "📣", jobCount: 82 },
-  { slug: "keuangan", name: "Keuangan", icon: "📊", jobCount: 57 },
-  { slug: "pendidikan", name: "Pendidikan", icon: "🎓", jobCount: 41 },
-  { slug: "kesehatan", name: "Kesehatan", icon: "🩺", jobCount: 36 },
+  { slug: "teknologi", name: "Teknologi & IT", icon: "code", jobCount: 124 },
+  { slug: "desain", name: "Desain & Kreatif", icon: "palette", jobCount: 68 },
+  { slug: "pemasaran", name: "Pemasaran", icon: "megaphone", jobCount: 82 },
+  { slug: "keuangan", name: "Keuangan", icon: "chart", jobCount: 57 },
+  { slug: "pendidikan", name: "Pendidikan", icon: "graduation", jobCount: 41 },
+  { slug: "kesehatan", name: "Kesehatan", icon: "stethoscope", jobCount: 36 },
 ];
 
 export const latestJobs = [
   {
     id: 1,
+    ref: "JOB-2601",
     title: "Frontend Developer",
     company: "Nusantara Digital",
     location: "Semarang",
@@ -20,10 +20,11 @@ export const latestJobs = [
     category: "Teknologi & IT",
     salary: "Rp 8 – 12 juta",
     postedAt: "2 hari lalu",
-    logoColor: "bg-indigo-100 text-indigo-700",
+    logoColor: "bg-[#f3efe6] text-[#1f1b16] border border-[#e8e4dc]",
   },
   {
     id: 2,
+    ref: "JOB-2602",
     title: "UI/UX Designer",
     company: "Arunika Studio",
     location: "Yogyakarta",
@@ -31,10 +32,11 @@ export const latestJobs = [
     category: "Desain & Kreatif",
     salary: "Rp 6 – 9 juta",
     postedAt: "3 hari lalu",
-    logoColor: "bg-pink-100 text-pink-700",
+    logoColor: "bg-[#f3efe6] text-[#1f1b16] border border-[#e8e4dc]",
   },
   {
     id: 3,
+    ref: "JOB-2603",
     title: "Digital Marketing Specialist",
     company: "Kopi Senja",
     location: "Bandung",
@@ -42,10 +44,11 @@ export const latestJobs = [
     category: "Pemasaran",
     salary: "Rp 5 – 8 juta",
     postedAt: "3 hari lalu",
-    logoColor: "bg-amber-100 text-amber-700",
+    logoColor: "bg-[#f3efe6] text-[#1f1b16] border border-[#e8e4dc]",
   },
   {
     id: 4,
+    ref: "JOB-2604",
     title: "Staf Akuntansi",
     company: "Bumi Finansial",
     location: "Jakarta",
@@ -53,10 +56,11 @@ export const latestJobs = [
     category: "Keuangan",
     salary: "Rp 6 – 10 juta",
     postedAt: "5 hari lalu",
-    logoColor: "bg-emerald-100 text-emerald-700",
+    logoColor: "bg-[#f3efe6] text-[#1f1b16] border border-[#e8e4dc]",
   },
   {
     id: 5,
+    ref: "JOB-2605",
     title: "Guru Bahasa Inggris",
     company: "Cendekia Edu",
     location: "Surabaya",
@@ -64,10 +68,11 @@ export const latestJobs = [
     category: "Pendidikan",
     salary: "Rp 3 – 5 juta",
     postedAt: "1 minggu lalu",
-    logoColor: "bg-sky-100 text-sky-700",
+    logoColor: "bg-[#f3efe6] text-[#1f1b16] border border-[#e8e4dc]",
   },
   {
     id: 6,
+    ref: "JOB-2606",
     title: "Backend Developer (Node.js)",
     company: "Nusantara Digital",
     location: "Remote",
@@ -75,6 +80,6 @@ export const latestJobs = [
     category: "Teknologi & IT",
     salary: "Rp 10 – 15 juta",
     postedAt: "1 minggu lalu",
-    logoColor: "bg-indigo-100 text-indigo-700",
+    logoColor: "bg-[#f3efe6] text-[#1f1b16] border border-[#e8e4dc]",
   },
 ];

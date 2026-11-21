@@ -6,30 +6,38 @@ import { navLinks, siteName } from "@/data/site";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-[#e8e4dc] bg-[#fbfaf7]/90 backdrop-blur-md">
       <nav
         aria-label="Navigasi utama"
         className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6"
       >
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2" onClick={closeMenu}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600 text-lg font-bold text-white">
-            J
+        {/* Brand */}
+        <Link
+          href="/"
+          className="flex items-center gap-2.5 text-[#1f1b16] transition-opacity hover:opacity-85 focus:outline-none"
+          onClick={closeMenu}
+        >
+          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-[#1f1b16] font-mono text-xs font-medium text-[#fbfaf7]">
+            JB
           </span>
-          <span className="text-lg font-bold text-slate-900">{siteName}</span>
+          <span className="text-[15px] font-semibold tracking-tight text-[#1f1b16]">
+            {siteName}
+          </span>
+          <span className="hidden rounded bg-[#f3efe6] px-1.5 py-0.5 text-[10px] font-medium tracking-wide text-[#7b7266] uppercase sm:inline-block">
+            Arsip ID
+          </span>
         </Link>
 
         {/* Menu desktop */}
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-7 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="text-sm font-medium text-slate-600 transition-colors hover:text-indigo-600"
+                className="text-[13px] font-medium text-[#5e554a] transition-colors hover:text-[#1f1b16]"
               >
                 {link.label}
               </Link>
@@ -37,37 +45,37 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Tombol Login / Register desktop */}
-        <div className="hidden items-center gap-3 md:flex">
+        {/* Tombol Akses Akun Desktop */}
+        <div className="hidden items-center gap-2.5 md:flex">
           <Link
             href="/login"
-            className="rounded-lg px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100"
+            className="rounded-lg px-3.5 py-1.5 text-[13px] font-medium text-[#5e554a] transition-colors hover:text-[#1f1b16]"
           >
-            Login
+            Masuk
           </Link>
           <Link
             href="/register"
-            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700"
+            className="rounded-lg border border-[#1f1b16] bg-[#1f1b16] px-3.5 py-1.5 text-[13px] font-medium text-[#faf9f5] transition-colors hover:bg-[#38332b] active:scale-[0.98]"
           >
-            Register
+            Daftar Akun
           </Link>
         </div>
 
-        {/* Tombol hamburger (mobile) */}
+        {/* Hamburger mobile */}
         <button
           type="button"
-          className="rounded-lg p-2 text-slate-700 hover:bg-slate-100 md:hidden"
+          className="rounded-md p-1.5 text-[#5e554a] hover:bg-[#f3efe6] md:hidden focus:outline-none"
           aria-label={isOpen ? "Tutup menu" : "Buka menu"}
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
           onClick={() => setIsOpen((open) => !open)}
         >
           <svg
-            className="h-6 w-6"
+            className="h-5 w-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}
+            strokeWidth={1.75}
             aria-hidden="true"
           >
             {isOpen ? (
@@ -80,40 +88,42 @@ export default function Navbar() {
       </nav>
 
       {/* Menu mobile */}
-      <div
-        id="mobile-menu"
-        className={`${isOpen ? "block" : "hidden"} border-t border-slate-200 bg-white md:hidden`}
-      >
-        <ul className="mx-auto max-w-6xl space-y-1 px-4 py-3 sm:px-6">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                onClick={closeMenu}
-                className="block rounded-lg px-3 py-2 text-base font-medium text-slate-700 hover:bg-slate-100"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="mx-auto flex max-w-6xl gap-3 px-4 pb-4 sm:px-6">
-          <Link
-            href="/login"
-            onClick={closeMenu}
-            className="flex-1 rounded-lg border border-slate-300 px-4 py-2 text-center text-sm font-medium text-slate-700 hover:bg-slate-50"
-          >
-            Login
-          </Link>
-          <Link
-            href="/register"
-            onClick={closeMenu}
-            className="flex-1 rounded-lg bg-indigo-600 px-4 py-2 text-center text-sm font-medium text-white hover:bg-indigo-700"
-          >
-            Register
-          </Link>
+      {isOpen && (
+        <div
+          id="mobile-menu"
+          className="border-b border-[#e8e4dc] bg-[#fbfaf7] px-4 pt-2 pb-5 md:hidden"
+        >
+          <ul className="space-y-1">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={closeMenu}
+                  className="block rounded-lg px-3 py-2 text-sm font-medium text-[#5e554a] hover:bg-[#f3efe6] hover:text-[#1f1b16]"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4 flex gap-2 border-t border-[#e8e4dc] pt-4">
+            <Link
+              href="/login"
+              onClick={closeMenu}
+              className="flex-1 rounded-lg border border-[#e8e4dc] bg-white py-2 text-center text-xs font-medium text-[#1f1b16]"
+            >
+              Masuk
+            </Link>
+            <Link
+              href="/register"
+              onClick={closeMenu}
+              className="flex-1 rounded-lg bg-[#1f1b16] py-2 text-center text-xs font-medium text-[#faf9f5]"
+            >
+              Daftar Akun
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }
